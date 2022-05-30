@@ -1,0 +1,8 @@
+security:
+  intuit:
+    additional-ignored: /v3/api-docs/**, /swagger-ui.html, /swagger-ui/**, /webjars/**, /swagger-resources/**, /v1/documents
+
+server:
+  include-debug-info: true
+  error:
+    include-message: always

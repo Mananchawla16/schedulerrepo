@@ -1,0 +1,5 @@
+FROM docker.intuit.com/dev/containers/karate-docker/service/karate-docker:0.9.4
+
+COPY app/src/test/java/api-mock.feature /opt/karate/api-mock.feature
+
+ENTRYPOINT exec java -jar /opt/karate/karate.jar -m /opt/karate/api-mock.feature -p 9000

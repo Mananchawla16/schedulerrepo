@@ -1,0 +1,10 @@
+jsk:
+  lastmile:
+    enabled: false
+  mesh:
+    enabled: true
+    port: ${MESH_TRAFFIC_PORT}
+security:
+  intuit:
+    cookies:
+      enabled: false

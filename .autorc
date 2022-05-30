@@ -1,0 +1,15 @@
+{
+  "repo": "scheduler",
+  "owner": "intcollabs-notification",
+  "githubApi": "https://github.intuit.com/api/v3",
+  "githubGraphqlApi": "https://github.intuit.com/api",
+  "author": "svc-sbseg-ci <SBSEGCI-Admins@intuit.com>",
+  "plugins": [
+    [
+      "jira",
+      "https://jira.intuit.com/browse"
+    ],
+    "conventional-commits",
+    "git-tag"
+  ]
+}

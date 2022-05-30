@@ -1,0 +1,18 @@
+security:
+  intuit:
+    additional-ignored: /v3/api-docs/**, /swagger-ui.html, /swagger-ui/**, /webjars/**, /swagger-resources/**, /v1/documents
+
+
+# Required in order to run in TLS locally 
+server:
+  port: 8443
+  include-debug-info: true
+  error:
+    include-message: always
+  ssl:
+    enabled: true
+    enabled-protocols: TLSv1.2
+    key-alias: local
+    key-store: local-keystore/keystore.pkcs12
+    key-store-password: local-keystore-password
+    key-store-type: PKCS12

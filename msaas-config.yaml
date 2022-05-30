@@ -1,0 +1,52 @@
+l1: notification
+l2: notifidel
+git_org: intcollabs-notification
+#
+
+service_name: scheduler
+asset_id: 8722364171316486115
+asset_alias: Intuit.intcollabs.notification.genericscheduler
+code_repo: github.intuit.com/intcollabs-notification/scheduler.git
+deploy_repo: github.intuit.com/intcollabs-notification/scheduler-deployment.git
+argocd_server: growth-eng.argocd.tools-k8s-prd.a.intuit.com:443
+argocd_project: intcollabs-notification-scheduler
+argocd_project_enabled: true
+#
+
+registry: docker.intuit.com
+repo: intcollabs-notification/generic-scheduler/service
+## change this to false once ready for PRD
+preprodOnly: true
+## change this to true for enable Code Analysis stage
+SonarQubeAnalysis: false
+## change this to true for stop your pipeline in quality gate error
+SonarQubeEnforce: false
+## change this to true for enabling Jira stories to be transitioned
+enableJiraTransition: false
+## enable this to true once test suite has matured in confidence to help automate deployments
+enableScorecardReadinessCheck: false
+## to bypass the scorecard readiness check's fall back, gitOpsApproval, set this to true
+skipScorecardManualFallback: false
+## Cocoon
+enableCocoon: false
+cleanupCocoon: false
+cocoonBasic: dev/patterns/cocoon/service/basic
+enableBuildQualityMetrics: true
+enableDeployQualityMetrics: true
+kubernetesServiceName: scheduler-desired-service
+environments:
+  qal-usw2-eks:
+    ingress_endpoint: https://notification-qal-scheduler-desired.growthppdusw2.iks2.a.intuit.com
+    jacoco_endpoint: https://notification-qal-scheduler-jacoco.growthppdusw2.iks2.a.intuit.com
+    cluster: https://eksapi-growth-ppd-usw2-k8s-1a23d9863a7b6bce.elb.us-west-2.amazonaws.com
+    namespace: intcollabs-notification-scheduler-usw2-qal
+    region: usw2
+    iks_type: ppd
+    manifest_format: Kustomize
+  e2e-usw2-eks:
+    ingress_endpoint: https://notification-e2e-scheduler.growthppdusw2.iks2.a.intuit.com
+    cluster: https://eksapi-growth-ppd-usw2-k8s-1a23d9863a7b6bce.elb.us-west-2.amazonaws.com
+    namespace: intcollabs-notification-scheduler-usw2-e2e
+    region: usw2
+    iks_type: ppd
+    manifest_format: Kustomize

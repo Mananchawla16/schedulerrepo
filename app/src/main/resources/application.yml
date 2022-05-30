@@ -1,0 +1,62 @@
+### March 2021 - during transition period, enable legacy mode for Spring Boot 2.4
+### See https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-Config-Data-Migration-Guide#legacy-mode
+### And https://wiki.intuit.com/display/CTODevSP/Spring+Boot+2.4+Migration+Notes
+### And https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4#using-legacy-processing
+spring:
+  config:
+    use-legacy-processing: true
+### AND to have Spring process bootstrap files - which was default behavior prior to Spring Boot 2.4 and
+### Spring Cloud 2020 - the project must either include spring-cloud-parent-bootstrap as a dependency,
+### *which we now do*, or else set the environment variable SPRING_CLOUD_BOOTSTRAP_ENABLED=true (!)
+### See above and https://docs.spring.io/spring-cloud-config/docs/3.0.0/reference/html/#config-data-import
+### ------------------------------------------------
+
+security:
+  intuit:
+    appId: Intuit.platform.ctoserviceplatform.serviceplatformrest
+    appSecret: preprdXeFmhCoWgvlcftuUJM8Qt31a232fH4nIoC
+    accessServiceEndpoint: https://access-e2e.platform.intuit.com/v2/tickets
+    additional-ignored: /v3/api-docs/**, /swagger-ui.html, /swagger-ui/**, /webjars/**, /swagger-resources/**
+
+
+# To disable Open API UI endpoints in PROD, uncomment the following in PROD profile
+# springdoc:
+#  api-docs:
+#   enabled: false
+#  swagger-ui:
+#   enabled: false
+
+jsk:
+  lastmile:
+    enabled: false
+
+
+# Configuration of TLS Termination in service layer
+server:
+  max-http-header-size: 32KB
+  port: 8443 # Set it to 8080 or some other value, if running in clear text mode
+  include-debug-info: false
+  error:
+    include-message: always # Might leak info if exceptions are sent as part of the error message
+  ssl:
+    enabled: true # Set to false to run in clear text mode, be sure to set 'service_layer_tls_termination' to no in entry.sh
+    enabled-protocols: TLSv1.2
+    key-alias: tomcat
+    key-store: /app/tmp/keystore.pkcs12
+    key-store-password: ${TLS_KEYSTORE_PASSWORD}
+    key-store-type: PKCS12
+
+management:
+  server:
+    port: 8490
+    ssl:
+      enabled: true
+      enabled-protocols: TLSv1.2
+      key-alias: tomcat
+      key-store: classpath:management.jks
+      key-store-password: password
+      key-store-type: jks
+  endpoints:
+    web:
+      exposure:
+        include: ["health","info","prometheus"]
