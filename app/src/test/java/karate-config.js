@@ -46,6 +46,9 @@ function fn() {
     else if (env === 'e2e-usw2-eks') {
         //Update your configurations for environments
     }
+    else if (env === 'prf-usw2-eks') {
+        //Update your configurations for environments
+    }
 
     return config;
 }
