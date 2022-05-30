@@ -415,5 +415,68 @@ pipeline {
                 }
             }
         }
+        stage('prf-usw2-eks') {
+            when {
+                beforeOptions true
+                allOf {
+                    branch 'master'
+                    not {changeRequest()}
+                }
+            }
+            post {
+                always {
+                    sendDeployMetrics(config, [boxsetVersion: "${config.image_full_name}", envName: 'prf-usw2-eks'])
+                }
+            }
+            options {
+                lock(resource: getEnv(config, 'prf-usw2-eks').namespace, inversePrecedence: true)
+                timeout(time: 32, unit: 'MINUTES')
+            }
+            stages {
+                stage('Scorecard Check') {
+                    when {expression {return config.enableScorecardReadinessCheck}}
+                    steps {
+                        scorecardPreprodReadiness(config, 'prf-usw2-eks')
+                    }
+                }
+                stage('Deploy') {
+                    steps {
+                        container('cdtools') {
+                            // This has to be the first action in the first sub-stage
+                            milestone(ordinal: 30, label: 'Deploy-prf-usw2-eks-milestone')
+                            gitOpsDeploy(config, 'prf-usw2-eks', config.image_full_name)
+                        }
+                    }
+                }
+                stage('Test') {
+                    steps {
+                        retry(5) {
+                            script {
+                                try {
+                                    container('test') {
+                                        sh label: 'Run Karate Tests', script: "mvn -s settings.xml -f app/pom.xml verify -Dmaven.repo.local=/var/run/shared-m2/repository -Pkarate -Dkarate.env=${getEnvName(config, 'prf-usw2-eks')}"
+                                    }
+                                }finally {
+                                    publishHTML target: [
+                                            allowMissing: true, 
+                                            alwaysLinkToLastBuild: false, 
+                                            keepAll: true, 
+                                            reportDir: 'app/target/cucumber-html-reports', 
+                                            reportFiles: 'overview-features.html', 
+                                            reportName: 'Integration test results'
+                                        ]
+                                }
+                            }
+                        }
+                    }
+                }
+                stage('Transition Jira Tickets') {
+                    when {expression {return config.enableJiraTransition}}
+                    steps {
+                        transitionJiraTickets(config, 'Deployed to PreProd')
+                    }
+                }
+            }
+        }
     }
 }

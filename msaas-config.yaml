@@ -50,3 +50,10 @@ environments:
     region: usw2
     iks_type: ppd
     manifest_format: Kustomize
+  prf-usw2-eks:
+    ingress_endpoint: https://notification-prf-scheduler.growthppdusw2.iks2.a.intuit.com
+    cluster: https://eksapi-growth-ppd-usw2-k8s-1a23d9863a7b6bce.elb.us-west-2.amazonaws.com
+    namespace: intcollabs-notification-scheduler-usw2-prf
+    region: usw2
+    iks_type: ppd
+    manifest_format: Kustomize
