@@ -49,14 +49,14 @@ pipeline {
                 }
             }
             stages {
-                stage('Get Next Release Version') {
-                    steps {
-                        container('cdtools') {
-                            autoPRCheck()
-                            autoReleaseVersion(config)
-                        }
-                    }
-                }
+//                 stage('Get Next Release Version') {
+//                     steps {
+//                         container('cdtools') {
+//                             autoPRCheck()
+//                             autoReleaseVersion(config)
+//                         }
+//                     }
+//                 }
                 stage('Docker Multi Stage Build') {
                     steps {
                         container('podman') {
