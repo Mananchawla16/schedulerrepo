@@ -103,8 +103,7 @@ Learn more about code contributions: [Intuit's InnerSource Guidelines](http://in
 
 ## Monitoring
 
-- *Pre-Production and Production Logs* are automatically configured and can be found on the Modern SaaS Environments configuration of the [DevPortal asset for this repo](https://devportal.intuit.com/app/dp/resource/8722364171316486115/configuration/environment).
-
+- *Pre-Production and Production Logs* are automatically configured and can be found on the Modern SaaS Environments configuration of the [DevPortal asset for this repo](https://devportal.intuit.com/app/dp/resource/8722364171316486115/configuration/environment)
 
 [Learn more](https://github.intuit.com/pages/kubernetes/modern-saas-docs/iks/iks_logging/) about MSaaS Logging.
 
