@@ -44,7 +44,7 @@ pipeline {
         stage('BUILD:') {
             when {
                 anyOf {
-                    branch 'msaas'
+                    branch 'master'
                     changeRequest()
                 }
             }
@@ -128,9 +128,9 @@ pipeline {
                 stage('Transition Jira Tickets') {
                     steps {
                         script {
-                            if (env.BRANCH_NAME != 'msaas' && changeRequest()) {
+                            if (env.BRANCH_NAME != 'master' && changeRequest()) {
                                 transitionJiraTickets(config, 'Ready for Review')
-                            } else if (env.BRANCH_NAME == 'msaas') {
+                            } else if (env.BRANCH_NAME == 'master') {
                                 transitionJiraTickets(config, 'Closed')
                             }
                         }
@@ -279,7 +279,7 @@ pipeline {
 //             when {
 //                 beforeOptions true
 //                 allOf {
-//                     branch 'msaas'
+//                     branch 'master'
 //                     not {changeRequest()}
 //                 }
 //             }
@@ -354,7 +354,7 @@ pipeline {
             when {
                 beforeOptions true
                 allOf {
-                    branch 'msaas'
+                    branch 'master'
                     not {changeRequest()}
                 }
             }
