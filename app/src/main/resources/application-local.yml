@@ -1,6 +1,7 @@
 security:
   intuit:
-    additional-ignored: /v3/api-docs/**, /swagger-ui.html, /swagger-ui/**, /webjars/**, /swagger-resources/**, /v1/documents
+    additional-ignored: /v3/api-docs/**, /swagger-ui.html, /swagger-ui/**, /webjars/**, /swagger-resources/**, /v1/documents, /jobs/**
+    permit-all: true
 
 
 # Required in order to run in TLS locally 

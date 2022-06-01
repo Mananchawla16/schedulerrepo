@@ -1,7 +1,8 @@
 package karate;
 
-import com.intuit.pavedroad.intcollabsnotification.schedulerapp.SchedulerApplication;
 import com.intuit.karate.junit4.Karate;
+import com.intuit.pavedroad.intcollabsnotification.schedulerapp.WebApplication;
+
 import lombok.extern.slf4j.Slf4j;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ public class KarateTestBase {
     @BeforeClass
     public static void setUpClass() throws Exception {
         log.info("Karate setUpClass called.");
-        runner = new KarateParallelRunner(SchedulerApplication.class);
+        runner = new KarateParallelRunner(WebApplication.class);
         runner.start(new String[]{"--spring.profiles.active=local", "--server.port=0"}, false);
 
     }
