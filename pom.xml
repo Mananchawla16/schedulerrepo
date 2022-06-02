@@ -9,8 +9,7 @@
 
     <modules>
         <module>app</module>
-        <module>package</module>
-        <module>core</module>
+        <!--<module>package</module>-->
         <module>processingapp</module>
     </modules>
 
