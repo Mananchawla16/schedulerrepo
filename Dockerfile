@@ -13,7 +13,6 @@ LABEL image=build
 ARG MVN_SETTINGS=settings.xml
 ARG appVersion=local
 COPY package /usr/src/package
-COPY package /usr/src/core
 COPY package /usr/src/processingapp
 COPY project.properties /usr/src/project.properties
 COPY app/pom.xml /usr/src/app/pom.xml

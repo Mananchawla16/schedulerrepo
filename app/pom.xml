@@ -16,7 +16,7 @@
 		<url>https://github.intuit.com/intcollabsnotification</url>
 	</organization>
 
-	<name>Services Platform Spring Boot Examples - Hello World Boot - Service</name>
+<!--	<name>Service for scheduling</name>-->
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
