@@ -9,7 +9,7 @@
 
     <modules>
         <module>app</module>
-        <!--<module>package</module>-->
+        <module>package</module>
         <module>processingapp</module>
     </modules>
 
