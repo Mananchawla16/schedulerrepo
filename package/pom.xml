@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.intuit.paved-road.intcollabs-notification</groupId>
   <artifactId>scheduler-package</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>${revision}</version>
   <packaging>pom</packaging>
   <properties>
     <dockerfile-maven-version>1.4.0</dockerfile-maven-version>
