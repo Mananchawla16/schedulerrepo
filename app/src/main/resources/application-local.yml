@@ -1,6 +1,6 @@
 security:
   intuit:
-    additional-ignored: /v3/api-docs/**, /swagger-ui.html, /swagger-ui/**, /webjars/**, /swagger-resources/**, /v1/documents, /jobs/**
+    additional-ignored: /v3/api-docs/**, /swagger-ui.html, /swagger-ui/**, /webjars/**, /swagger-resources/**, /v1/documents, /jobs/**, /dashboard/**
     permit-all: true
 
 
@@ -17,3 +17,23 @@ server:
     key-store: local-keystore/keystore.pkcs12
     key-store-password: local-keystore-password
     key-store-type: PKCS12
+
+spring:
+  data:
+    mongodb:
+      hostname: localhost
+      database: scheduler
+      port: 27017
+      username: "username"
+      password: "password"
+      min-pool-size: 10
+      max-pool-size: 50
+
+org:
+  jobrunr:
+    background-job-server:
+      enabled: true
+      worker-count: 10
+      poll-interval-in-seconds: 60
+    dashboard:
+      enabled: true

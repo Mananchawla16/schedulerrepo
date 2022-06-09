@@ -1,4 +1,4 @@
-package org.jobrunr.examples.model;
+package com.intuit.pavedroad.intcollabsnotification.core.model;
 
 import org.jobrunr.jobs.JobId;
 

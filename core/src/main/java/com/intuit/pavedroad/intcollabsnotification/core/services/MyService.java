@@ -1,4 +1,4 @@
-package org.jobrunr.examples.services;
+package com.intuit.pavedroad.intcollabsnotification.core.services;
 
 import org.jobrunr.jobs.annotations.Job;
 import org.jobrunr.jobs.context.JobContext;

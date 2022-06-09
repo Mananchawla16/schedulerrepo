@@ -17,6 +17,7 @@ COPY project.properties /usr/src/project.properties
 COPY app/pom.xml /usr/src/app/pom.xml
 COPY pom.xml /usr/src/pom.xml
 COPY ${MVN_SETTINGS} /usr/src/settings.xml
+COPY core /usr/src/core
 COPY app /usr/src/app
 # '-U' to avoid missing updated SNAPSHOTs; see MSAASINT-4291.
 RUN mvn -U -f /usr/src/pom.xml -s /usr/src/settings.xml -Drevision=${appVersion} clean install

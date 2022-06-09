@@ -1,6 +1,6 @@
-package org.jobrunr.examples.util;
+package com.intuit.pavedroad.intcollabsnotification.core.util;
 
-import org.jobrunr.examples.model.OinpJobRequest;
+import com.intuit.pavedroad.intcollabsnotification.core.model.OinpJobRequest;
 import org.jobrunr.jobs.lambdas.JobRequestHandler;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +16,6 @@ public class OinpJobRequestHandler implements JobRequestHandler<OinpJobRequest> 
         //gracetime can also be handled here
      //use OinpJobRequest here to actually process that request - let's say send data to kafka or something
         //Test
-        System.out.printf("Sending " + jobRequest.getScheduleId() + " to Kafka%n");
+        System.out.printf("Sending " + jobRequest.toString() + " to Kafka%n");
     }
 }

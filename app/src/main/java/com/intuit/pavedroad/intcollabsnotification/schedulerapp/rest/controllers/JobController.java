@@ -3,10 +3,10 @@ package com.intuit.pavedroad.intcollabsnotification.schedulerapp.rest.controller
 import java.time.Duration;
 import java.time.OffsetDateTime;
 
-import org.jobrunr.examples.model.OinpJobRequest;
-import org.jobrunr.examples.model.ScheduledKeysCache;
-import org.jobrunr.examples.services.MyService;
-import org.jobrunr.examples.services.MyServiceInterface;
+import com.intuit.pavedroad.intcollabsnotification.core.model.OinpJobRequest;
+import com.intuit.pavedroad.intcollabsnotification.core.model.ScheduledKeysCache;
+import com.intuit.pavedroad.intcollabsnotification.core.services.MyService;
+import com.intuit.pavedroad.intcollabsnotification.core.services.MyServiceInterface;
 import org.jobrunr.jobs.JobId;
 import org.jobrunr.jobs.context.JobContext;
 import org.jobrunr.scheduling.BackgroundJobRequest;

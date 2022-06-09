@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.intuit.paved-road.intcollabs-notification</groupId>
+    <groupId>com.intuit.pavedroad.intcollabsnotification</groupId>
     <artifactId>scheduler-aggregator</artifactId>
-	<version>${revision}</version>
+	<version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
+        <module>core</module>
         <module>app</module>
         <module>package</module>
-        <module>processingapp</module>
     </modules>
 
 	<properties>
@@ -29,26 +29,31 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.intuit.paved-road.intcollabs-notification</groupId>
+                <groupId>com.intuit.pavedroad.intcollabsnotification</groupId>
                 <artifactId>spring-example-core</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
-            <dependency>
-                <groupId>org.jobrunr.examples</groupId>
-                <artifactId>spring-example-processingapp</artifactId>
-                <version>${project.parent.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.intuit.pavedroad.intcollabsnotification</groupId>-->
+<!--                <artifactId>scheduler-app</artifactId>-->
+<!--                <version>1.0.0-SNAPSHOT</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.intuit.pavedroad.intcollabsnotification.processing</groupId>-->
+<!--                <artifactId>processing-app</artifactId>-->
+<!--                <version>1.0.0-SNAPSHOT</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>org.jobrunr</groupId>
                 <artifactId>jobrunr-spring-boot-starter</artifactId>
                 <version>${jobrunr.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.xerial</groupId>
-                <artifactId>sqlite-jdbc</artifactId>
-                <version>${sql-lite.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.xerial</groupId>-->
+<!--                <artifactId>sqlite-jdbc</artifactId>-->
+<!--                <version>${sql-lite.version}</version>-->
+<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
     
