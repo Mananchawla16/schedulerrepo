@@ -1,7 +1,10 @@
 package com.intuit.pavedroad.intcollabsnotification.schedulerapp.rest.controllers;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import com.intuit.pavedroad.intcollabsnotification.core.model.OinpJobRequest;
 import com.intuit.pavedroad.intcollabsnotification.core.model.ScheduledKeysCache;
@@ -24,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static java.time.Instant.now;
 
 @RestController
-@RequestMapping("/jobs")
+@RequestMapping("/v1/jobs")
 public class JobController {
 
     private final JobScheduler jobScheduler;
@@ -82,9 +85,10 @@ public class JobController {
 
     @PostMapping(value = "/schedule-oinp-job", produces = {MediaType.TEXT_PLAIN_VALUE})
     public String scheduleOINPJob(@RequestBody OinpJobRequest oinpJobRequest) {
-        //OffsetDateTime offsetDateTime = OffsetDateTime.parse(oinpJobRequest.getTriggerAt()); //this needs to be passed properly
+        ZonedDateTime zonedDateTime = OffsetDateTime.parse(oinpJobRequest.getTriggerAt()).atZoneSimilarLocal(ZoneId.of("Asia" +
+                "/Kolkata"));
         //ZonedDateTime can also be used - check if request should also provide zone ?
-        final JobId scheduledJobId = BackgroundJobRequest.schedule(OffsetDateTime.now().plusSeconds(120), oinpJobRequest);
+        final JobId scheduledJobId = BackgroundJobRequest.schedule(zonedDateTime, oinpJobRequest);
         ScheduledKeysCache.addRecord(oinpJobRequest.getScheduleId(), scheduledJobId);
         return "Job Scheduled: " + scheduledJobId;
     }

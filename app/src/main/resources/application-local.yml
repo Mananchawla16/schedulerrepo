@@ -22,7 +22,7 @@ spring:
   data:
     mongodb:
       hostname: localhost
-      database: scheduler
+      database: jobrunr
       port: 27017
       username: "username"
       password: "password"
