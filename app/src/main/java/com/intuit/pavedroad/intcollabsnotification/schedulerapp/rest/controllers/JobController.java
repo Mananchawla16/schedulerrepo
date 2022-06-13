@@ -10,17 +10,14 @@ import com.intuit.pavedroad.intcollabsnotification.core.model.OinpJobRequest;
 import com.intuit.pavedroad.intcollabsnotification.core.model.ScheduledKeysCache;
 import com.intuit.pavedroad.intcollabsnotification.core.services.MyService;
 import com.intuit.pavedroad.intcollabsnotification.core.services.MyServiceInterface;
-<<<<<<< HEAD
+
 import com.intuit.platform.jsk.security.iam.authn.IntuitTicketAuthentication;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-=======
 
-import io.swagger.v3.oas.annotations.Operation;
->>>>>>> 0a6f9226e65da9b13e258adc3167f0a865f74e2b
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 import org.jobrunr.jobs.JobId;
@@ -30,7 +27,6 @@ import org.jobrunr.scheduling.JobScheduler;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
