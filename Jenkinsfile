@@ -350,39 +350,39 @@ pipeline {
 //                 }
 //             }
 //         }
-        stage('e2e-usw2-eks') {
-            when {
-                beforeOptions true
-                allOf {
-                    branch 'master'
-                    not {changeRequest()}
-                }
-            }
-            post {
-                always {
-                    sendDeployMetrics(config, [boxsetVersion: "${config.image_full_name}", envName: 'e2e-usw2-eks'])
-                }
-            }
-            options {
-                lock(resource: getEnv(config, 'e2e-usw2-eks').namespace, inversePrecedence: true)
-                timeout(time: 32, unit: 'MINUTES')
-            }
-            stages {
-                stage('Scorecard Check') {
-                    when {expression {return config.enableScorecardReadinessCheck}}
-                    steps {
-                        scorecardPreprodReadiness(config, 'e2e-usw2-eks')
-                    }
-                }
-                stage('Deploy') {
-                    steps {
-                        container('cdtools') {
-                            // This has to be the first action in the first sub-stage
-                            milestone(ordinal: 20, label: 'Deploy-e2e-usw2-eks-milestone')
-                            gitOpsDeploy(config, 'e2e-usw2-eks', config.image_full_name)
-                        }
-                    }
-                }
+//         stage('e2e-usw2-eks') {
+//             when {
+//                 beforeOptions true
+//                 allOf {
+//                     branch 'master'
+//                     not {changeRequest()}
+//                 }
+//             }
+//             post {
+//                 always {
+//                     sendDeployMetrics(config, [boxsetVersion: "${config.image_full_name}", envName: 'e2e-usw2-eks'])
+//                 }
+//             }
+//             options {
+//                 lock(resource: getEnv(config, 'e2e-usw2-eks').namespace, inversePrecedence: true)
+//                 timeout(time: 32, unit: 'MINUTES')
+//             }
+//             stages {
+//                 stage('Scorecard Check') {
+//                     when {expression {return config.enableScorecardReadinessCheck}}
+//                     steps {
+//                         scorecardPreprodReadiness(config, 'e2e-usw2-eks')
+//                     }
+//                 }
+//                 stage('Deploy') {
+//                     steps {
+//                         container('cdtools') {
+//                             // This has to be the first action in the first sub-stage
+//                             milestone(ordinal: 20, label: 'Deploy-e2e-usw2-eks-milestone')
+//                             gitOpsDeploy(config, 'e2e-usw2-eks', config.image_full_name)
+//                         }
+//                     }
+//                 }
 //                 stage('Test') {
 //                     steps {
 //                         script {
@@ -407,14 +407,14 @@ pipeline {
 //                         }
 //                     }
 //                 }
-                stage('Transition Jira Tickets') {
-                    when {expression {return config.enableJiraTransition}}
-                    steps {
-                        transitionJiraTickets(config, 'Deployed to PreProd')
-                    }
-                }
-            }
-        }
+//                 stage('Transition Jira Tickets') {
+//                     when {expression {return config.enableJiraTransition}}
+//                     steps {
+//                         transitionJiraTickets(config, 'Deployed to PreProd')
+//                     }
+//                 }
+//             }
+//         }
         stage('prf-usw2-eks') {
             when {
                 beforeOptions true
