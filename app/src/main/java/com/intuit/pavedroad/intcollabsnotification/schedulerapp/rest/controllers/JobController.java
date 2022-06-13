@@ -1,12 +1,25 @@
 package com.intuit.pavedroad.intcollabsnotification.schedulerapp.rest.controllers;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
-import org.jobrunr.examples.model.OinpJobRequest;
-import org.jobrunr.examples.model.ScheduledKeysCache;
-import org.jobrunr.examples.services.MyService;
-import org.jobrunr.examples.services.MyServiceInterface;
+import com.intuit.pavedroad.intcollabsnotification.core.model.OinpJobRequest;
+import com.intuit.pavedroad.intcollabsnotification.core.model.ScheduledKeysCache;
+import com.intuit.pavedroad.intcollabsnotification.core.services.MyService;
+import com.intuit.pavedroad.intcollabsnotification.core.services.MyServiceInterface;
+
+import com.intuit.platform.jsk.security.iam.authn.IntuitTicketAuthentication;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 import org.jobrunr.jobs.JobId;
 import org.jobrunr.jobs.context.JobContext;
 import org.jobrunr.scheduling.BackgroundJobRequest;
@@ -14,7 +27,6 @@ import org.jobrunr.scheduling.JobScheduler;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static java.time.Instant.now;
 
 @RestController
-@RequestMapping("/jobs")
+@RequestMapping( "v1/jobs")
 public class JobController {
 
     private final JobScheduler jobScheduler;
@@ -80,16 +92,22 @@ public class JobController {
         return "Job Enqueued: " + enqueuedJobId;
     }
 
-    @PostMapping(value = "/schedule-oinp-job", produces = {MediaType.TEXT_PLAIN_VALUE})
-    public String scheduleOINPJob(@RequestBody OinpJobRequest oinpJobRequest) {
-        //OffsetDateTime offsetDateTime = OffsetDateTime.parse(oinpJobRequest.getTriggerAt()); //this needs to be passed properly
+    @RequestMapping(value = "/schedule-oinp-job", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @Operation(description = "Schedule a notification for oinp", summary = "Schedule a notification using job request",
+            security = {@SecurityRequirement(name = "privateAuthUser", scopes = {}) })
+    @ApiResponses(value = { @ApiResponse(responseCode = "400", description = "Bad request") })
+    public String scheduleOINPJob(@RequestBody OinpJobRequest oinpJobRequest, @Parameter(hidden = true) IntuitTicketAuthentication principal) {
+        ZonedDateTime zonedDateTime = OffsetDateTime.parse(oinpJobRequest.getTriggerAt()).atZoneSimilarLocal(ZoneId.of("Asia" +
+                "/Kolkata"));
         //ZonedDateTime can also be used - check if request should also provide zone ?
-        final JobId scheduledJobId = BackgroundJobRequest.schedule(OffsetDateTime.now().plusSeconds(120), oinpJobRequest);
+        final JobId scheduledJobId = BackgroundJobRequest.schedule(zonedDateTime, oinpJobRequest);
         ScheduledKeysCache.addRecord(oinpJobRequest.getScheduleId(), scheduledJobId);
         return "Job Scheduled: " + scheduledJobId;
     }
 
     @RequestMapping(value = "/kill-oinp-job/{scheduleId}", method = RequestMethod.DELETE)
+    @Operation(description = "Disable a notification for oinp", summary = "Disable a notification using scheduleId",
+            security = {@SecurityRequirement(name = "privateAuthUser", scopes = {}) })
     public void killScheduledOINPJob(@PathVariable("scheduleId") String scheduleId) {
         JobId jobId = ScheduledKeysCache.getJobId(scheduleId);
         BackgroundJobRequest.delete(jobId); //in actual cache we can plan to keep only job's uuid rather than full object

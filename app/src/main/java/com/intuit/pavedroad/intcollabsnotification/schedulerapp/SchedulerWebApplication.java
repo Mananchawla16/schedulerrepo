@@ -1,15 +1,16 @@
-package com.intuit.scheduler.intcollabsnotification.processing;
+package com.intuit.pavedroad.intcollabsnotification.schedulerapp;
 
-import org.jobrunr.examples.JobRunrStorageConfiguration;
+import com.intuit.pavedroad.intcollabsnotification.core.JobRunrStorageConfiguration;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @Import(JobRunrStorageConfiguration.class)
-public class JobServerApplication {
+public class SchedulerWebApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JobServerApplication.class, args);
+        SpringApplication.run(SchedulerWebApplication.class, args);
     }
 }

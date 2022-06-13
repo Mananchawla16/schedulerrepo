@@ -1,8 +1,11 @@
-package org.jobrunr.examples.model;
+package com.intuit.pavedroad.intcollabsnotification.core.model;
+
+import com.intuit.pavedroad.intcollabsnotification.core.util.OinpJobRequestHandler;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.jobrunr.examples.util.OinpJobRequestHandler;
+import lombok.ToString;
+
 import org.jobrunr.jobs.lambdas.JobRequest;
 import org.jobrunr.jobs.lambdas.JobRequestHandler;
 
@@ -12,6 +15,7 @@ import org.jobrunr.jobs.lambdas.JobRequestHandler;
  **/
 @Getter
 @NoArgsConstructor
+@ToString
 public class OinpJobRequest implements JobRequest {
 
     private String scheduleId;

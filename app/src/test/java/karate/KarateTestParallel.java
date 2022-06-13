@@ -2,7 +2,7 @@ package karate;
 
 import com.intuit.karate.cucumber.CucumberRunner;
 import com.intuit.karate.cucumber.KarateStats;
-import com.intuit.pavedroad.intcollabsnotification.schedulerapp.WebApplication;
+import com.intuit.pavedroad.intcollabsnotification.schedulerapp.SchedulerWebApplication;
 
 import cucumber.api.CucumberOptions;
 import net.masterthought.cucumber.Configuration;
@@ -38,7 +38,7 @@ public class KarateTestParallel {
     public static void beforeClass() throws Exception {
         String env = System.getProperty("karate.env");
         if (env == null || env.equalsIgnoreCase("local")) {
-            server = new ServerStart(WebApplication.class);
+            server = new ServerStart(SchedulerWebApplication.class);
             server.start(TEST_ARGS, false);
             System.setProperty("karate.server.port", server.getPort() + "");
         }

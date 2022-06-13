@@ -11,10 +11,10 @@ security:
     iamTicketFlowEnabled: true
     authZFlowEnabled: false
 
-environment: e2e
+environment: prf
 authz:
   config:
-    connectingEnvironment: e2e
+    connectingEnvironment: prf
 
 spring:
   data:

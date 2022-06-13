@@ -14,7 +14,7 @@
     </appender>
 
     
-    <logger name="com.intuit.paved-road.intcollabs-notification" level="DEBUG" additivity="false">
+    <logger name="com.intuit.pavedroad.intcollabsnotification" level="DEBUG" additivity="false">
         <appender-ref ref="SERVER_CONSOLE" />
     </logger>
 
