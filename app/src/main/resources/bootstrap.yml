@@ -20,10 +20,6 @@ management:
 ---
 # overrides prf environment properties
 spring:
-  profiles: prf
-  cloud:
-    config:
-      profile: prf,prf-usw2
   config:
     activate:
       on-profile: prf
