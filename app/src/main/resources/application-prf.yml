@@ -8,6 +8,8 @@ security:
   intuit:
     cookies:
       enabled: false
+    iamTicketFlowEnabled: false
+    authZFlowEnabled: true
 
 environment: prf
 authz:
