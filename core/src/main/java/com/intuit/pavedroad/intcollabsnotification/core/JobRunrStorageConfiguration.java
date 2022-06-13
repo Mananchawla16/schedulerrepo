@@ -2,6 +2,7 @@ package com.intuit.pavedroad.intcollabsnotification.core;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
 import com.intuit.pavedroad.intcollabsnotification.core.config.DocDbSslContextBuilder;
 import com.intuit.pavedroad.intcollabsnotification.core.config.MongoProperties;
@@ -88,6 +89,8 @@ public class JobRunrStorageConfiguration {
             ConnectionPoolSettings connectionPoolSettings = ConnectionPoolSettings.builder()
                     .minSize(minConnectionPoolSize)
                     .maxSize(maxConnectionPoolSize)
+                    .maxConnectionLifeTime(30, TimeUnit.MINUTES)
+                    .maxConnectionIdleTime( 60000, TimeUnit.MILLISECONDS)
                     .build();
             settingsBuilder.applyToConnectionPoolSettings(builder -> builder.applySettings(connectionPoolSettings));
         }
