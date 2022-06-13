@@ -10,8 +10,17 @@ import com.intuit.pavedroad.intcollabsnotification.core.model.OinpJobRequest;
 import com.intuit.pavedroad.intcollabsnotification.core.model.ScheduledKeysCache;
 import com.intuit.pavedroad.intcollabsnotification.core.services.MyService;
 import com.intuit.pavedroad.intcollabsnotification.core.services.MyServiceInterface;
+<<<<<<< HEAD
+import com.intuit.platform.jsk.security.iam.authn.IntuitTicketAuthentication;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+=======
+
+import io.swagger.v3.oas.annotations.Operation;
+>>>>>>> 0a6f9226e65da9b13e258adc3167f0a865f74e2b
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 import org.jobrunr.jobs.JobId;
@@ -87,10 +96,11 @@ public class JobController {
         return "Job Enqueued: " + enqueuedJobId;
     }
 
-    @PostMapping(value = "/schedule-oinp-job", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/schedule-oinp-job", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(description = "Schedule a notification for oinp", summary = "Schedule a notification using job request",
             security = {@SecurityRequirement(name = "privateAuthUser", scopes = {}) })
-    public String scheduleOINPJob(@RequestBody OinpJobRequest oinpJobRequest) {
+    @ApiResponses(value = { @ApiResponse(responseCode = "400", description = "Bad request") })
+    public String scheduleOINPJob(@RequestBody OinpJobRequest oinpJobRequest, @Parameter(hidden = true) IntuitTicketAuthentication principal) {
         ZonedDateTime zonedDateTime = OffsetDateTime.parse(oinpJobRequest.getTriggerAt()).atZoneSimilarLocal(ZoneId.of("Asia" +
                 "/Kolkata"));
         //ZonedDateTime can also be used - check if request should also provide zone ?

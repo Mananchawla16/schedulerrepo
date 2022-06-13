@@ -9,6 +9,11 @@ security:
     cookies:
       enabled: false
 
+environment: e2e
+authz:
+  config:
+    connectingEnvironment: e2e
+
 spring:
   data:
     mongodb:

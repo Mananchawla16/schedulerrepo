@@ -9,6 +9,11 @@ security:
     cookies:
       enabled: false
 
+environment: prf
+authz:
+  config:
+    connectingEnvironment: prf
+
 spring:
   data:
     mongodb:
