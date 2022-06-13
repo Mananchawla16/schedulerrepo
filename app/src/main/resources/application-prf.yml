@@ -19,7 +19,7 @@ authz:
 spring:
   data:
     mongodb:
-      hostname: scheduler-docdb-prf.ccmjg31hu82n.us-west-2.docdb.amazonaws.com
+      hostname: scheduler-docdb-prf.cluster-ccmjg31hu82n.us-west-2.docdb.amazonaws.com
       database: jobrunr
       port: 27017
       min-pool-size: 10

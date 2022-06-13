@@ -61,8 +61,7 @@ public class JobRunrStorageConfiguration {
         /* Set requiredClusterType to REPLICA_SET if not in local environment */
         if (Arrays.stream(activeProfiles).noneMatch(x -> StringUtils.equalsIgnoreCase("LOCAL", x))) {
             clusterSettingsBuilder
-                    .requiredClusterType(ClusterType.REPLICA_SET)
-                    .mode(ClusterConnectionMode.MULTIPLE);
+                    .requiredClusterType(ClusterType.REPLICA_SET);
         }
         ClusterSettings clusterSettings = clusterSettingsBuilder.build();
         MongoClientSettings.Builder settingsBuilder = MongoClientSettings.builder()
@@ -89,9 +88,9 @@ public class JobRunrStorageConfiguration {
             ConnectionPoolSettings connectionPoolSettings = ConnectionPoolSettings.builder()
                     .minSize(minConnectionPoolSize)
                     .maxSize(maxConnectionPoolSize)
-                    .maxWaitTime(10, TimeUnit.MINUTES)
-                    .maxConnectionLifeTime(30, TimeUnit.MINUTES)
-                    .maxConnectionIdleTime( 60000, TimeUnit.MILLISECONDS)
+//                    .maxWaitTime(10, TimeUnit.MINUTES)
+//                    .maxConnectionLifeTime(30, TimeUnit.MINUTES)
+//                    .maxConnectionIdleTime( 60000, TimeUnit.MILLISECONDS)
                     .build();
             settingsBuilder.applyToConnectionPoolSettings(builder -> builder.applySettings(connectionPoolSettings));
         }
