@@ -1,6 +1,10 @@
 spring:
   application:
-    name: jsk-sp-boot-mvc-sample
+    name: scheduler
+  cloud:
+    config:
+      uri: https://config-e2e.api.intuit.com/v2
+      label: master
     
 
 # https://wiki.intuit.com/display/CTODevSecurity/TLS+Protocol+Standards    
@@ -8,11 +12,24 @@ server:
  ssl:
   enabled-protocols: TLSv1.2
   
-  
-  
 management:
  server:
    ssl:
     enabled-protocols: TLSv1.2
+
+---
+# overrides prf environment properties
+spring:
+  profiles: prf
+  cloud:
+    config:
+      profile: prf,prf-usw2
+  config:
+    activate:
+      on-profile: prf
+  data:
+    mongodb:
+      username: "scheduleruser"
+      password: "schedulerpwd"
 
     
