@@ -88,9 +88,9 @@ public class JobRunrStorageConfiguration {
             ConnectionPoolSettings connectionPoolSettings = ConnectionPoolSettings.builder()
                     .minSize(minConnectionPoolSize)
                     .maxSize(maxConnectionPoolSize)
-//                    .maxWaitTime(10, TimeUnit.MINUTES)
-//                    .maxConnectionLifeTime(30, TimeUnit.MINUTES)
-//                    .maxConnectionIdleTime( 60000, TimeUnit.MILLISECONDS)
+                    .maxWaitTime(10, TimeUnit.MINUTES)
+                    .maxConnectionLifeTime(30, TimeUnit.MINUTES)
+                    .maxConnectionIdleTime( 60000, TimeUnit.MILLISECONDS)
                     .build();
             settingsBuilder.applyToConnectionPoolSettings(builder -> builder.applySettings(connectionPoolSettings));
         }
