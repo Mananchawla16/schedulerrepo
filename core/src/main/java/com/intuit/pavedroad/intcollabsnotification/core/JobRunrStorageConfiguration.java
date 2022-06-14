@@ -61,7 +61,6 @@ public class JobRunrStorageConfiguration {
         /* Set requiredClusterType to REPLICA_SET if not in local environment */
         if (Arrays.stream(activeProfiles).noneMatch(x -> StringUtils.equalsIgnoreCase("LOCAL", x))) {
             clusterSettingsBuilder
-                    .requiredReplicaSetName("rs0")
                     .mode(ClusterConnectionMode.SINGLE)
                     .requiredClusterType(ClusterType.UNKNOWN);
         }
