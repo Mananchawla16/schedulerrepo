@@ -63,8 +63,7 @@ public class JobRunrStorageConfiguration {
             clusterSettingsBuilder
                     .requiredReplicaSetName("rs0")
                     .mode(ClusterConnectionMode.SINGLE)
-                    .requiredClusterType(ClusterType.STANDALONE);
-//                    .requiredClusterType(ClusterType.REPLICA_SET);
+                    .requiredClusterType(ClusterType.UNKNOWN);
         }
         ClusterSettings clusterSettings = clusterSettingsBuilder.build();
         MongoClientSettings.Builder settingsBuilder = MongoClientSettings.builder()
