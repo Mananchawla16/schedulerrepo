@@ -9,7 +9,7 @@ object Scheduler extends Base {
 
   val CREATE_SCHEDULE = "create_scheduler"
 
-  def createDocument(): ChainBuilder = Request {
+  def createSchedule(): ChainBuilder = Request {
     http(CREATE_SCHEDULE)
       .post("v1/jobs/schedule-oinp-job")
       .header("intuit_tid",session=>generateTID("schedulerLoadTest"))

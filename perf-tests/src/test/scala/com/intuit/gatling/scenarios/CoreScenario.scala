@@ -17,6 +17,7 @@ object CoreScenario extends Base{
             exec(FakeDocs.getDocumentById).
             exec(FakeDocs.updateDocument).
             exec(FakeDocs.deleteDocument)
+            exec(Scheduler.createSchedule)
         )
     }
 
