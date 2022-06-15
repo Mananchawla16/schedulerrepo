@@ -37,3 +37,4 @@ org:
       poll-interval-in-seconds: 60
     dashboard:
       enabled: true
+      port: 8443
