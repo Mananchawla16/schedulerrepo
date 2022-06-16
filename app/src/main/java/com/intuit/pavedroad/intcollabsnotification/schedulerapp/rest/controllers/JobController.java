@@ -20,6 +20,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.jobrunr.jobs.JobId;
 import org.jobrunr.jobs.context.JobContext;
 import org.jobrunr.scheduling.BackgroundJobRequest;
@@ -37,6 +39,7 @@ import static java.time.Instant.now;
 
 @RestController
 @RequestMapping( "v1/jobs")
+@Slf4j
 public class JobController {
 
     private final JobScheduler jobScheduler;
@@ -97,6 +100,7 @@ public class JobController {
             security = {@SecurityRequirement(name = "privateAuthUser", scopes = {}) })
     @ApiResponses(value = { @ApiResponse(responseCode = "400", description = "Bad request") })
     public String scheduleOINPJob(@RequestBody OinpJobRequest oinpJobRequest, @Parameter(hidden = true) IntuitTicketAuthentication principal) {
+        log.info("Starting request processing");
         ZonedDateTime zonedDateTime = OffsetDateTime.parse(oinpJobRequest.getTriggerAt()).atZoneSimilarLocal(ZoneId.of("Asia" +
                 "/Kolkata"));
         //ZonedDateTime can also be used - check if request should also provide zone ?
@@ -111,7 +115,7 @@ public class JobController {
     public void killScheduledOINPJob(@PathVariable("scheduleId") String scheduleId) {
         JobId jobId = ScheduledKeysCache.getJobId(scheduleId);
         BackgroundJobRequest.delete(jobId); //in actual cache we can plan to keep only job's uuid rather than full object
-        System.out.println("Job: " + jobId + " deleted successfully");
+        log.info("Job: " + jobId + " deleted successfully");
     }
 
 

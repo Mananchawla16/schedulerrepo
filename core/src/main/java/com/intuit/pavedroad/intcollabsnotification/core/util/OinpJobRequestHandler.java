@@ -1,6 +1,11 @@
 package com.intuit.pavedroad.intcollabsnotification.core.util;
 
+import java.util.concurrent.TimeUnit;
+
 import com.intuit.pavedroad.intcollabsnotification.core.model.OinpJobRequest;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.jobrunr.jobs.lambdas.JobRequestHandler;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +14,7 @@ import org.springframework.stereotype.Component;
  * @createdAt 23/05/22
  **/
 @Component
+@Slf4j
 public class OinpJobRequestHandler implements JobRequestHandler<OinpJobRequest> {
 
     @Override
@@ -16,6 +22,8 @@ public class OinpJobRequestHandler implements JobRequestHandler<OinpJobRequest> 
         //gracetime can also be handled here
      //use OinpJobRequest here to actually process that request - let's say send data to kafka or something
         //Test
-        System.out.printf("Sending " + jobRequest.toString() + " to Kafka%n");
+        log.info("Sending " + jobRequest + " to Kafka%n");
+        TimeUnit.SECONDS.sleep(1);
+        log.info("Sent successfully to Kafka at" + System.currentTimeMillis() + "%n");
     }
 }
