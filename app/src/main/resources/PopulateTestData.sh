@@ -8,10 +8,10 @@ while read timestamp; do
   task(){
      curl --location --request POST 'https://notification-prf-scheduler.growthppdusw2.iks2.a.intuit.com/v1/jobs/schedule-oinp-job' \
      --header 'Content-Type: application/json' \
-     --header 'Authorization: Intuit_IAM_Authentication intuit_appid="Intuit.intcollabs.notification.testscheduler",  intuit_app_secret="preprdBCVLELCYQ5zXDcJ9DdXz2g9HO1zEhu1nFu", intuit_userid="4620816365747796540",intuit_token="V1-217-X3mq9tmj9rl8jv9burrc0h",intuit_token_type=IAM-Ticket' \
-     --header 'intuit_tid: scheduler_1hrt-'$(uuidgen)'' \
+     --header 'Authorization: Intuit_IAM_Authentication intuit_appid="Intuit.intcollabs.notification.testscheduler",  intuit_app_secret="preprdBCVLELCYQ5zXDcJ9DdXz2g9HO1zEhu1nFu", intuit_userid="4620816365747796540",intuit_token="V1-232-X3j13p27awxcwvibymwjhh",intuit_token_type=IAM-Ticket' \
+     --header 'intuit_tid: scheduler_Fin-'$(uuidgen)'' \
      --data-raw '{
-         "scheduleId": "demo3-scheduleId",
+         "scheduleId": "demo4-scheduleId",
          "triggerAt": "'"$timestamp"'",
          "graceTime": "",
          "triggerData": "{\"authId\":\"ghfhgj\",\"sourceObjectId\":\"ghhg\",\"sourceServiceId\":\"fhg\",\"creationDate\":\"gfhj\"}"
