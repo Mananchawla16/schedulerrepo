@@ -4,6 +4,7 @@ import com.intuit.pavedroad.intcollabsnotification.core.util.OinpJobRequestHandl
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import org.jobrunr.jobs.lambdas.JobRequest;
@@ -19,6 +20,7 @@ import org.jobrunr.jobs.lambdas.JobRequestHandler;
 public class OinpJobRequest implements JobRequest {
 
     private String scheduleId;
+    @Setter
     private String triggerAt;
     private String graceTime;
     private String triggerData;
