@@ -443,7 +443,7 @@ pipeline {
                     steps {
                         container('cdtools') {
                             // This has to be the first action in the first sub-stage
-                            milestone(ordinal: 30, label: 'Deploy-prf-usw2-eks-milestone')
+                            milestone(ordinal: 10, label: 'Deploy-prf-usw2-eks-milestone')
                             gitOpsDeploy(config, 'prf-usw2-eks', config.image_full_name)
                         }
                     }

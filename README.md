@@ -5,7 +5,12 @@ Java SpringMVC Starter app for MSaaS
 [![Build Status](https://build.intuit.com/growth/buildStatus/buildIcon?job=intcollabs-notification/scheduler/scheduler/master)](https://build.intuit.com/growth/job/intcollabs-notification/job/scheduler/job/scheduler/job/master/)
 [![Code Coverage](https://build.intuit.com/growth/buildStatus/coverageIcon?job=intcollabs-notification/scheduler/scheduler/master)](https://build.intuit.com/growth//job/intcollabs-notificationjob/scheduler/job/scheduler/job/master/)
 
+## Maintainers of this application
+
+Please see [MAINTAINERS.md](./MAINTAINERS.md).
+
 ## Usage
+
 This starter app is a simple Java SpringMVC service
 
 [//]: # (local development) 
@@ -22,13 +27,16 @@ This starter app is a simple Java SpringMVC service
 First, either type this terminal/shell command, or put it in your `~/.bashrc` or `~/.zshrc` file:
 
 ```
-export NEXUS_PROXY_URL=https://nexus.intuit.com/nexus
+export NEXUS_PROXY_URL=https://artifact.intuit.com/artifactory/maven-proxy
 ```
 
 From Terminal line run this command:
 ```
    mvn clean spring-boot:run -s settings.xml  -Dspring-boot.run.profiles=local
 ```
+
+That `-s settings.xml` can be omitted if you have a `~/.m2/settings.xml` file that
+includes the same contents — feel free to copy this one.
 
 To make sure the application is running, check its health
 ```
@@ -103,7 +111,7 @@ Learn more about code contributions: [Intuit's InnerSource Guidelines](http://in
 
 ## Monitoring
 
-- *Pre-Production and Production Logs* are automatically configured and can be found on the Modern SaaS Environments configuration of the [DevPortal asset for this repo](https://devportal.intuit.com/app/dp/resource/8722364171316486115/configuration/environment)
+- *Pre-Production and Production Logs* are automatically configured and can be found on the Modern SaaS Environments configuration of the [DevPortal asset for this repo](https://devportal.intuit.com/app/dp/resource/8722364171316486115/configuration/environment).
 
 [Learn more](https://github.intuit.com/pages/kubernetes/modern-saas-docs/iks/iks_logging/) about MSaaS Logging.
 
