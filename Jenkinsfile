@@ -26,7 +26,7 @@ pipeline {
                 body: """
                         Job Status for '${env.JOB_NAME} [${env.BUILD_NUMBER}]': ${currentBuild.result}\n\nCheck console output at ${env.BUILD_URL}
                 """, 
-                to: 'neha_gupta1@intuit.com'
+                to: 'test@gmail.com'
             )
         }
         unsuccessful {
@@ -35,7 +35,7 @@ pipeline {
                 body: """
                         Job Status for '${env.JOB_NAME} [${env.BUILD_NUMBER}]': ${currentBuild.result}\n\nCheck console output at ${env.BUILD_URL}
                 """, 
-                to: 'neha_gupta1@intuit.com'
+                to: 'test@gmail.com'
             )
         }
     }

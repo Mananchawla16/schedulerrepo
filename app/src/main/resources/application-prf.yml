@@ -4,12 +4,12 @@ jsk:
   mesh:
     enabled: true
     port: ${MESH_TRAFFIC_PORT}
-security:
-  intuit:
-    cookies:
-      enabled: false
-    iamTicketFlowEnabled: true
-    authZFlowEnabled: false
+#security:
+#  intuit:
+#    cookies:
+#      enabled: false
+#    iamTicketFlowEnabled: true
+#    authZFlowEnabled: false
 
 environment: prf
 authz:

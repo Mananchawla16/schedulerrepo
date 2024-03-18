@@ -1,10 +1,4 @@
-security:
-  intuit:
-    additional-ignored: /v3/api-docs/**, /swagger-ui.html, /swagger-ui/**, /webjars/**, /swagger-resources/**, /v1/documents, /jobs/**, /dashboard/**
-    permit-all: true
-
-
-# Required in order to run in TLS locally 
+# Required in order to run in TLS locally
 server:
   port: 8443
   include-debug-info: true

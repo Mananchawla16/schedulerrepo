@@ -11,13 +11,6 @@ spring:
 ### See above and https://docs.spring.io/spring-cloud-config/docs/3.0.0/reference/html/#config-data-import
 ### ------------------------------------------------
 
-security:
-  intuit:
-    appId: Intuit.platform.ctoserviceplatform.serviceplatformrest
-    appSecret: preprdXeFmhCoWgvlcftuUJM8Qt31a232fH4nIoC
-    accessServiceEndpoint: https://access-e2e.platform.intuit.com/v2/tickets
-    additional-ignored: /v3/api-docs/**, /swagger-ui.html, /swagger-ui/**, /webjars/**, /swagger-resources/**
-
 
 # To disable Open API UI endpoints in PROD, uncomment the following in PROD profile
 # springdoc:
@@ -60,3 +53,7 @@ management:
     web:
       exposure:
         include: ["health","info","prometheus"]
+
+service:
+  index:
+    iks: true

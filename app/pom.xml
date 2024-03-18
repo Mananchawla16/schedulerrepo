@@ -2,21 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.intuit.pavedroad.intcollabsnotification</groupId>
+    <groupId>com.test.pavedroad.intcollabsnotification</groupId>
     <artifactId>scheduler-app</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <!-- name>scheduler</name -->
-    <!-- description>Demo project for JSK-based Microservice</description -->
 
     <url>https://github.intuit.com/intcollabsnotification/scheduler.git</url>
-    <organization>
-        <name>Intuit, Inc. :: intcollabsnotification :: scheduler</name>
-        <url>https://github.intuit.com/intcollabsnotification</url>
-    </organization>
 
-<!--	<name>Service for scheduling</name>-->
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,7 +19,7 @@
 		<jskbom.version>2.11.1</jskbom.version>
 		<v4schema.version />
 		<openapi.version>1.3.9</openapi.version>
-		<start-class>com.intuit.pavedroad.intcollabsnotification.schedulerapp.SchedulerApplication</start-class>
+		<start-class>com.test.pavedroad.intcollabsnotification.schedulerapp.SchedulerApplication</start-class>
 		<jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
 		<maven-cucumber-version>3.8.0</maven-cucumber-version>	<!-- TODO: update - 3.8.0 is from 2017 -->
 		<maven-compiler.version>3.6.0</maven-compiler.version>
@@ -38,28 +31,11 @@
 		<karate.version>0.9.5</karate.version>
 
         <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
-        <central.repo>https://artifact.intuit.com/artifactory/maven-proxy</central.repo>
-        <!-- Perf Test Dependencies -->
+
         <gatling-maven-plugin.version>3.1.2</gatling-maven-plugin.version>
     </properties>
 
     <dependencies>
-
-        <dependency>
-            <groupId>com.intuit.platform.jsk</groupId>
-            <artifactId>jsk-spring-boot-starter-mvc</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.intuit.platform.jsk.spring</groupId>
-            <artifactId>jsk-spring-boot-starter-k8s-metrics</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.intuit.pavedroad.intcollabsnotification</groupId>
-            <artifactId>spring-example-core</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -73,14 +49,9 @@
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>	 <!-- Process bootstrap files; see API-1725 -->
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            <version>4.0.0</version><!-- Process bootstrap files; see API-1725 -->
             <exclusions>
-                <!-- Intuit requires use of FIPS 140-2 compliant bc-fips rather than non-compliant bcprov-jdk15on
-                     and bcpkix-jdk15on. You will need to add this same "exclusions" section to other dependencies
-                     if they import those.  See
-                        * the update(s) to https://stackoverflow.intuit.com/questions/10776/10777#10777
-                        * and https://github.intuit.com/services-java/jsk-spring-security#fips-140-2-compliance
-                -->
                 <exclusion>
                     <groupId>org.bouncycastle</groupId>
                     <artifactId>bcpkix-jdk15on</artifactId>	<!-- replaced by bcpkix-fips, below -->
@@ -92,41 +63,35 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bc-fips</artifactId>      <!-- replaces bcprov-jdk15on, which must be excluded from all dependencies that import it -->
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-fips</artifactId>  <!-- replaces bcpkix-jdk15on, which must be excluded from all dependencies that import it -->
-        </dependency>
-
-        <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>${openapi.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-        </dependency>
-
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>3.2.2</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>	<!-- For JUnit4 use: dropped from spring-boot-starter-test as of Spring Boot 2.4.0 -->
+            <version>5.7.0</version>
             <scope>test</scope>
             <!-- see https://wiki.intuit.com/display/CTODevSP/Spring+Boot+2.4+Migration+Notes -->
             <exclusions>
@@ -137,42 +102,6 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-apache</artifactId>
-            <version>${karate.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-junit4</artifactId>
-            <version>${karate.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-gatling</artifactId>
-            <version>${karate.version}</version>
-            <scope>test</scope>
-            <exclusions>
-                <!-- Intuit requires use of FIPS 140-2 compliant bc-fips rather than non-compliant bcprov-jdk15on
-                     and bcpkix-jdk15on. You will need to add this same "exclusions" section to other dependencies
-                     if they import those.  See
-                        * the update(s) to https://stackoverflow.intuit.com/questions/10776/10777#10777
-                        * and https://github.intuit.com/services-java/jsk-spring-security#fips-140-2-compliance
-                -->
-                <exclusion>
-                    <groupId>org.bouncycastle</groupId>
-                    <artifactId>bcpkix-jdk15on</artifactId>	<!-- replaced by bcpkix-fips, below -->
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bouncycastle</groupId>
-                    <artifactId>bcprov-jdk15on</artifactId> <!-- replaced by bc-fips, below -->
-                </exclusion>
-            </exclusions>
-        </dependency>
 
         <dependency>
             <groupId>net.masterthought</groupId>
@@ -184,13 +113,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.intuit.ctg.devgru.test</groupId>
-            <artifactId>api-test-starter</artifactId>
-            <version>1.0.4</version>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.sonarsource.java</groupId>
@@ -198,32 +120,13 @@
             <version>3.8</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>com.intuit.ctg.tools</groupId>
-            <artifactId>perf-utils</artifactId>
-            <version>1.0.3</version>
-            <scope>test</scope>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.intuit.platform.jsk</groupId>
-            <artifactId>jsk-mesh-autoconfig</artifactId>
+            <groupId>com.test.pavedroad.intcollabsnotification</groupId>
+            <artifactId>spring-example-core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.intuit.platform.jsk</groupId>
-                <artifactId>jsk-bom</artifactId>
-                <version>${jskbom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 
     <build>
@@ -250,11 +153,6 @@
                         </goals>
                         <configuration>
                             <classifier>exec</classifier>
-                            <!-- 2022-01-10: SPRING_CLOUD_BOOTSTRAP_ENABLED is longer _needed_ as we have added
-                                 spring-cloud-starter-bootstrap, but users may want to consider setting
-                                 spring.config.use-legacy-processing a.k.a. SPRING_CONFIG_USELEGACYPROCESSING to true, per
-                                 https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4#using-legacy-processing
-                                 https://wiki.intuit.com/display/CTODevSP/Spring+Boot+2.4+Migration+Notes -->
                         </configuration>
                     </execution>
 
@@ -614,14 +512,6 @@
                             <compilerArgument>-Werror</compilerArgument>
                         </configuration>
                     </plugin>
-                    <plugin>
-                        <groupId>io.gatling</groupId>
-                        <artifactId>gatling-maven-plugin</artifactId>
-                        <version>${gatling-maven-plugin.version}</version>
-                        <configuration>
-                            <simulationsFolder>src/test/scala/simulations</simulationsFolder>
-                        </configuration>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -641,33 +531,33 @@
                     </testResource>
                 </testResources>
                 <plugins>
-                    <plugin>
-                        <groupId>com.intuit.ctg.qe</groupId>
-                        <artifactId>jacoco-service-maven-plugin</artifactId>
-                        <version>1.0.5</version>
-                        <configuration>
-                            <!-- Jacoco agent is only attached in the QAL environment.
-                                Corresponding Jacoco service is enabled in the QAL namespace for collecting the jacoco exec file.
-                                Changing this to any other environment would require deployment changes-->
-                            <hostname>${jacocoServiceEndpoint}</hostname>
-                            <hostnames>
-                                <!-- The list of hostname(s) you would like to dump the JaCoCo exec data from -->
-                                <hostname>${kubernetesServiceName}</hostname>
-                            </hostnames>
-                            <reset>true</reset> <!-- Flag to reset or not -->
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>run</id>
-                                <goals>
-                                    <goal>postrequest</goal> <!-- Async post to get the request -->
-                                    <goal>getstatus</goal> <!-- Blocking call to wait until the request is complete -->
-                                    <goal>getrequest
-                                    </goal> <!-- Download the JaCoCo Exec file so that we can generate the report -->
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
+<!--                    <plugin>-->
+<!--                        <groupId>com.intuit.ctg.qe</groupId>-->
+<!--                        <artifactId>jacoco-service-maven-plugin</artifactId>-->
+<!--                        <version>1.0.5</version>-->
+<!--                        <configuration>-->
+<!--                            &lt;!&ndash; Jacoco agent is only attached in the QAL environment.-->
+<!--                                Corresponding Jacoco service is enabled in the QAL namespace for collecting the jacoco exec file.-->
+<!--                                Changing this to any other environment would require deployment changes&ndash;&gt;-->
+<!--                            <hostname>${jacocoServiceEndpoint}</hostname>-->
+<!--                            <hostnames>-->
+<!--                                &lt;!&ndash; The list of hostname(s) you would like to dump the JaCoCo exec data from &ndash;&gt;-->
+<!--                                <hostname>${kubernetesServiceName}</hostname>-->
+<!--                            </hostnames>-->
+<!--                            <reset>true</reset> &lt;!&ndash; Flag to reset or not &ndash;&gt;-->
+<!--                        </configuration>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>run</id>-->
+<!--                                <goals>-->
+<!--                                    <goal>postrequest</goal> &lt;!&ndash; Async post to get the request &ndash;&gt;-->
+<!--                                    <goal>getstatus</goal> &lt;!&ndash; Blocking call to wait until the request is complete &ndash;&gt;-->
+<!--                                    <goal>getrequest-->
+<!--                                    </goal> &lt;!&ndash; Download the JaCoCo Exec file so that we can generate the report &ndash;&gt;-->
+<!--                                </goals>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                    </plugin>-->
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
@@ -722,45 +612,10 @@
         </profile>
     </profiles>
 
-    <!-- SCM configurations to allow maven updates to source control. E.g.:
-        org.apache.maven.plugins:maven-release-plugin can create and update release
-        tags to your git repo -->
     <scm>
         <connection>scm:git:https://github.intuit.com/intcollabsnotification/scheduler.git</connection>
         <developerConnection>scm:git:https://github.intuit.com/intcollabsnotification/scheduler.git</developerConnection>
         <url>https://github.intuit.com/intcollabsnotification/scheduler</url>
         <tag>HEAD</tag>
     </scm>
-
-    <repositories>
-        <repository>
-            <id>central-repo</id>
-            <url>${central.repo}</url>
-            <name>Intuit Nexus Cache</name>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>central-plugin-repo</id>
-            <url>${central.repo}</url>
-            <name>Intuit Nexus Cache (plugins)</name>
-        </pluginRepository>
-    </pluginRepositories>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>scm.dev.snap.repo</id>
-            <name>SNAPSHOT REPO</name>
-            <url>https://artifact.intuit.com/artifactory/Intuit.Snapshots</url>
-            <layout>default</layout>
-        </snapshotRepository>
-        <repository>
-            <id>scm.int.rel.repo</id>
-            <name>RELEASE REPO</name>
-            <url>https://artifact.intuit.com/artifactory/Intuit.Releases</url>
-            <layout>default</layout>
-        </repository>
-    </distributionManagement>
 </project>
