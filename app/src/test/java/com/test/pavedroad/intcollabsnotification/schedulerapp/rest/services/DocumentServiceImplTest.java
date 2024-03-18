@@ -1,7 +1,7 @@
 package com.test.pavedroad.intcollabsnotification.schedulerapp.rest.services;
 
 
-import com.intuit.pavedroad.intcollabsnotification.schedulerapp.models.Document;
+import com.test.pavedroad.intcollabsnotification.schedulerapp.models.Document;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

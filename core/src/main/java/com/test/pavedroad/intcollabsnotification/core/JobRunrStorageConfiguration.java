@@ -94,8 +94,6 @@ public class JobRunrStorageConfiguration {
         MongoTemplate mongoTemplate = new MongoTemplate(
                 createMongoClient(createMongoSettingsBuilder), mongoProperties.getDatabase());
         MappingMongoConverter mappingMongoConverter = (MappingMongoConverter) mongoTemplate.getConverter();
-        /* The default constructor adds _class field by default. So we need to explicitly pass null so that no mapper
-        is set and _class field is not added */
         mappingMongoConverter.setTypeMapper(new DefaultMongoTypeMapper(null));
         mappingMongoConverter.setCustomConversions(mongoCustomConversions);
         mappingMongoConverter.afterPropertiesSet();

@@ -1,6 +1,6 @@
 package com.test.pavedroad.intcollabsnotification.schedulerapp.rest.controllers.errors;
 
-import com.intuit.pavedroad.intcollabsnotification.schedulerapp.rest.controllers.errors.SimpleErrorResponseBody;
+import com.test.pavedroad.intcollabsnotification.schedulerapp.rest.controllers.errors.SimpleErrorResponseBody;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

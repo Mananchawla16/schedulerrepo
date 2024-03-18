@@ -1,6 +1,6 @@
 package com.test.pavedroad.intcollabsnotification.schedulerapp.rest.controllers.errors;
 
-import com.intuit.pavedroad.intcollabsnotification.schedulerapp.rest.controllers.errors.SimpleErrorResponse;
+import com.test.pavedroad.intcollabsnotification.schedulerapp.rest.controllers.errors.SimpleErrorResponse;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 

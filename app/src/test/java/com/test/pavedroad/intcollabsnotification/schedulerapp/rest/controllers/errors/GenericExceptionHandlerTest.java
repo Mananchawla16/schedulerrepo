@@ -1,9 +1,8 @@
 package com.test.pavedroad.intcollabsnotification.schedulerapp.rest.controllers.errors;
 
 
-import com.intuit.pavedroad.intcollabsnotification.schedulerapp.rest.controllers.errors.SimpleErrorResponse;
-import com.intuit.pavedroad.intcollabsnotification.schedulerapp.rest.services.DocumentConstraintViolationException;
-import com.intuit.pavedroad.intcollabsnotification.schedulerapp.rest.services.DocumentNotFoundException;
+import com.test.pavedroad.intcollabsnotification.schedulerapp.rest.services.DocumentConstraintViolationException;
+import com.test.pavedroad.intcollabsnotification.schedulerapp.rest.services.DocumentNotFoundException;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 
