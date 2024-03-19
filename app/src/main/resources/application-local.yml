@@ -6,22 +6,52 @@ server:
     include-message: always
   ssl:
     enabled: true
-    enabled-protocols: TLSv1.2
+#    enabled-protocols: TLSv1.2
     key-alias: local
     key-store: local-keystore/keystore.pkcs12
     key-store-password: local-keystore-password
     key-store-type: PKCS12
 
+
+management:
+  server:
+    port: 8490
+    ssl:
+      enabled: true
+      enabled-protocols: TLSv1.2
+      key-alias: tomcat
+      key-store: classpath:management.jks
+      key-store-password: password
+      key-store-type: jks
+  endpoints:
+    # endpoints disabled for security concerns (API-1850)
+    enabled-by-default: false
+    web:
+      exposure:
+        include: [ "health","info","prometheus" ]
+  endpoint:
+    httptrace:
+      enabled: false
+    info:
+      enabled: false
+    health:
+      enabled: false
+#spring:
+#  data:
+#    mongodb:
+#      hostname: localhost
+#      database: jobrunr
+#      port: 27017
+#      username: "username"
+#      password: "password"
+#      min-pool-size: 10
+#      max-pool-size: 50
+
 spring:
   data:
     mongodb:
-      hostname: localhost
+      uri: mongodb://localhost:27017/
       database: jobrunr
-      port: 27017
-      username: "username"
-      password: "password"
-      min-pool-size: 10
-      max-pool-size: 50
 
 org:
   jobrunr:
@@ -31,3 +61,12 @@ org:
       poll-interval-in-seconds: 60
     dashboard:
       enabled: true
+
+retry:
+  mongo:
+    maxAttempts: 5
+    maxDelay: 20000
+
+service:
+  index:
+    iks: false

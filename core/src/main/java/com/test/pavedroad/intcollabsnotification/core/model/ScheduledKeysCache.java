@@ -5,10 +5,6 @@ import org.jobrunr.jobs.JobId;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author ngupta16
- * @createdAt 25/05/22
- **/
 public class ScheduledKeysCache {
 
     /*Map : scheduleId - jobId */

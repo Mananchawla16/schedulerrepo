@@ -3,6 +3,10 @@
 ### And https://wiki.intuit.com/display/CTODevSP/Spring+Boot+2.4+Migration+Notes
 ### And https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4#using-legacy-processing
 spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/
+      database: jobrunr
   config:
     use-legacy-processing: true
 ### AND to have Spring process bootstrap files - which was default behavior prior to Spring Boot 2.4 and
@@ -22,7 +26,9 @@ spring:
 jsk:
   lastmile:
     enabled: false
-
+service:
+  index:
+    iks: true
 
 # Configuration of TLS Termination in service layer
 server:
@@ -33,27 +39,8 @@ server:
     include-message: always # Might leak info if exceptions are sent as part of the error message
   ssl:
     enabled: true # Set to false to run in clear text mode, be sure to set 'service_layer_tls_termination' to no in entry.sh
-    enabled-protocols: TLSv1.2
+#    enabled-protocols: TLSv1.1
     key-alias: tomcat
     key-store: /app/tmp/keystore.pkcs12
     key-store-password: ${TLS_KEYSTORE_PASSWORD}
     key-store-type: PKCS12
-
-management:
-  server:
-    port: 8490
-    ssl:
-      enabled: true
-      enabled-protocols: TLSv1.2
-      key-alias: tomcat
-      key-store: classpath:management.jks
-      key-store-password: password
-      key-store-type: jks
-  endpoints:
-    web:
-      exposure:
-        include: ["health","info","prometheus"]
-
-service:
-  index:
-    iks: true

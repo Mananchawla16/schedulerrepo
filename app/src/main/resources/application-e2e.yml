@@ -4,12 +4,6 @@ jsk:
   mesh:
     enabled: true
     port: ${MESH_TRAFFIC_PORT}
-security:
-  intuit:
-    cookies:
-      enabled: false
-    iamTicketFlowEnabled: true
-    authZFlowEnabled: false
 
 environment: e2e
 authz:
@@ -19,11 +13,11 @@ authz:
 spring:
   data:
     mongodb:
-      hostname: scheduler-docdb-prf.cluster-ccmjg31hu82n.us-west-2.docdb.amazonaws.com
-      database: jobrunr
+      hostname: "documentDbHostName"
       port: 27017
-      min-pool-size: 10
-      max-pool-size: 50
+      database: jobrunr
+      username: "username"
+      password: "password"
 
 org:
   jobrunr:

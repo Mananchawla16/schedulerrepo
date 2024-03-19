@@ -21,7 +21,6 @@ public class DocumentNotFoundException extends DocumentServiceException {
      * Construct with a message {@code String} that is returned by the inherited
      * {@code Throwable.getMessage}.
      *
-     * @param message
      *            the message that is returned by the inherited
      *            {@code Throwable.getMessage}
      * @param documentId
