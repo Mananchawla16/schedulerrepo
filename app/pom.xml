@@ -8,7 +8,6 @@
     <packaging>jar</packaging>
 
 
-    <url>https://github.intuit.com/intcollabsnotification/scheduler.git</url>
 
 
 	<properties>
@@ -93,7 +92,6 @@
             <artifactId>junit-vintage-engine</artifactId>	<!-- For JUnit4 use: dropped from spring-boot-starter-test as of Spring Boot 2.4.0 -->
             <version>5.7.0</version>
             <scope>test</scope>
-            <!-- see https://wiki.intuit.com/display/CTODevSP/Spring+Boot+2.4+Migration+Notes -->
             <exclusions>
                 <exclusion>
                     <groupId>org.hamcrest</groupId>
@@ -246,13 +244,6 @@
                         <include>**/*TestCase.java</include>
                     </includes>
                     <useFile>true</useFile>
-                    <!-- March 2021 - during transition period, enable legacy mode for Spring
-                        Boot 2.4 See https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-Config-Data-Migration-Guide#legacy-mode
-                        and https://wiki.intuit.com/display/CTODevSP/Spring+Boot+2.4+Migration+Notes
-                        . And we also need to set the system property spring.cloud.bootstrap.enabled
-                        (or equivalent environment variable) to have Spring Boot 2.4 (Spring Cloud
-                        2020) process bootstrap files! See above and https://docs.spring.io/spring-cloud-config/docs/3.0.0/reference/html/#config-data-import
-                        and http://maven.apache.org/surefire/maven-surefire-plugin/faq.html#late-property-evaluation -->
                     <argLine>@{argLine} @{surefireArgLine}
                         -Dspring.cloud.bootstrap.enabled=true
                         -Dspring.config.use-legacy-processing=true</argLine>
@@ -307,13 +298,6 @@
                                     <value>org.sonar.java.jacoco.JUnitListener</value>
                                 </property>
                             </properties>
-                            <!-- March 2021 - during transition period, enable legacy mode for
-                                Spring Boot 2.4 See https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-Config-Data-Migration-Guide#legacy-mode
-                                and https://wiki.intuit.com/display/CTODevSP/Spring+Boot+2.4+Migration+Notes
-                                . And we also need to set the system property spring.cloud.bootstrap.enabled
-                                (or equivalent environment variable) to have Spring Boot 2.4 (Spring Cloud
-                                2020) process bootstrap files! See above and https://docs.spring.io/spring-cloud-config/docs/3.0.0/reference/html/#config-data-import
-                                and http://maven.apache.org/surefire/maven-surefire-plugin/faq.html#late-property-evaluation -->
                             <argLine>@{argLine} @{surefireArgLine}
                                 -Dspring.cloud.bootstrap.enabled=true
                                 -Dspring.config.use-legacy-processing=true</argLine>
@@ -353,13 +337,6 @@
                                     <value>org.sonar.java.jacoco.JUnitListener</value>
                                 </property>
                             </properties>
-                            <!-- March 2021 - during transition period, enable legacy mode for
-                                Spring Boot 2.4 See https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-Config-Data-Migration-Guide#legacy-mode
-                                and https://wiki.intuit.com/display/CTODevSP/Spring+Boot+2.4+Migration+Notes
-                                . And we also need to set the system property spring.cloud.bootstrap.enabled
-                                (or equivalent environment variable) to have Spring Boot 2.4 (Spring Cloud
-                                2020) process bootstrap files! See above and https://docs.spring.io/spring-cloud-config/docs/3.0.0/reference/html/#config-data-import
-                                and http://maven.apache.org/surefire/maven-surefire-plugin/faq.html#late-property-evaluation -->
                             <argLine>@{surefireArgLine} -Dspring.cloud.bootstrap.enabled=true
                                 -Dspring.config.use-legacy-processing=true</argLine>
                         </configuration>
@@ -434,13 +411,6 @@
                                     <value>org.sonar.java.jacoco.JUnitListener</value>
                                 </property>
                             </properties>
-                            <!-- March 2021 - during transition period, enable legacy mode for
-                                Spring Boot 2.4 See https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-Config-Data-Migration-Guide#legacy-mode
-                                and https://wiki.intuit.com/display/CTODevSP/Spring+Boot+2.4+Migration+Notes
-                                . And we also need to set the system property spring.cloud.bootstrap.enabled
-                                (or equivalent environment variable) to have Spring Boot 2.4 (Spring Cloud
-                                2020) process bootstrap files! See above and https://docs.spring.io/spring-cloud-config/docs/3.0.0/reference/html/#config-data-import
-                                and http://maven.apache.org/surefire/maven-surefire-plugin/faq.html#late-property-evaluation -->
                             <argLine>@{surefireArgLine} -Dspring.cloud.bootstrap.enabled=true
                                 -Dspring.config.use-legacy-processing=true</argLine>
                         </configuration>
@@ -531,33 +501,6 @@
                     </testResource>
                 </testResources>
                 <plugins>
-<!--                    <plugin>-->
-<!--                        <groupId>com.intuit.ctg.qe</groupId>-->
-<!--                        <artifactId>jacoco-service-maven-plugin</artifactId>-->
-<!--                        <version>1.0.5</version>-->
-<!--                        <configuration>-->
-<!--                            &lt;!&ndash; Jacoco agent is only attached in the QAL environment.-->
-<!--                                Corresponding Jacoco service is enabled in the QAL namespace for collecting the jacoco exec file.-->
-<!--                                Changing this to any other environment would require deployment changes&ndash;&gt;-->
-<!--                            <hostname>${jacocoServiceEndpoint}</hostname>-->
-<!--                            <hostnames>-->
-<!--                                &lt;!&ndash; The list of hostname(s) you would like to dump the JaCoCo exec data from &ndash;&gt;-->
-<!--                                <hostname>${kubernetesServiceName}</hostname>-->
-<!--                            </hostnames>-->
-<!--                            <reset>true</reset> &lt;!&ndash; Flag to reset or not &ndash;&gt;-->
-<!--                        </configuration>-->
-<!--                        <executions>-->
-<!--                            <execution>-->
-<!--                                <id>run</id>-->
-<!--                                <goals>-->
-<!--                                    <goal>postrequest</goal> &lt;!&ndash; Async post to get the request &ndash;&gt;-->
-<!--                                    <goal>getstatus</goal> &lt;!&ndash; Blocking call to wait until the request is complete &ndash;&gt;-->
-<!--                                    <goal>getrequest-->
-<!--                                    </goal> &lt;!&ndash; Download the JaCoCo Exec file so that we can generate the report &ndash;&gt;-->
-<!--                                </goals>-->
-<!--                            </execution>-->
-<!--                        </executions>-->
-<!--                    </plugin>-->
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
@@ -565,9 +508,8 @@
                         <configuration>
                             <title>${project.name} for ${project.groupId}:${project.artifactId}:${project.version}
                             </title>
-                            <footer>&copy;2017 Intuit, Inc. Generated ${maven.build.timestamp}</footer>
                             <includes>
-                                <include>com/intuit/**/*</include> <!-- Only include Intuit packages in the report. -->
+                                <include>com/intuit/**/*</include>
                             </includes>
                             <dataFile>${basedir}/target/jacoco-it.exec</dataFile>
                         </configuration>
@@ -612,10 +554,4 @@
         </profile>
     </profiles>
 
-    <scm>
-        <connection>scm:git:https://github.intuit.com/intcollabsnotification/scheduler.git</connection>
-        <developerConnection>scm:git:https://github.intuit.com/intcollabsnotification/scheduler.git</developerConnection>
-        <url>https://github.intuit.com/intcollabsnotification/scheduler</url>
-        <tag>HEAD</tag>
-    </scm>
 </project>

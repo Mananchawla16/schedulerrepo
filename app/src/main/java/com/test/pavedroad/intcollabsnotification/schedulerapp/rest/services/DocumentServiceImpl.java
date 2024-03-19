@@ -1,8 +1,3 @@
-/**
- * Copyright 2015-2020 Intuit Inc. All rights reserved. Unauthorized reproduction
- * is a violation of applicable law. This material contains certain
- * confidential or proprietary information and trade secrets of Intuit Inc.
- */
 package com.test.pavedroad.intcollabsnotification.schedulerapp.rest.services;
 
 import java.util.ArrayList;
@@ -26,7 +21,6 @@ import com.test.pavedroad.intcollabsnotification.schedulerapp.models.Documents;
  * This implementation of {@code DocumentService} uses a concurrent hash map as
  * an in-memory store.
  * 
- * @author koppenheim
  *
  */
 @Service

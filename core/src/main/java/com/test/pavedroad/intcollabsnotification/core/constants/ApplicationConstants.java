@@ -38,5 +38,4 @@ public class ApplicationConstants {
 
     public static final String PRODUCER_CONFIG = "ProducerConfig";
 
-    public static final String INTUIT_TID = "intuit_tid";
 }

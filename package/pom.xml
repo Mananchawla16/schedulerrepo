@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.intuit.pavedroad.intcollabsnotification</groupId>
+  <groupId>com.test.pavedroad.intcollabsnotification</groupId>
   <artifactId>scheduler-package</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -9,9 +9,6 @@
     <dockerfile-maven-version>1.4.0</dockerfile-maven-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <application.run.user>bootapp</application.run.user>
-<!--    <docker.repository>docker.intuit.com</docker.repository>-->
-<!--    <docker.path>intcollabs-notification/generic-scheduler/service</docker.path>-->
-<!--    <docker.image>scheduler</docker.image>-->
     <timestamp>${maven.build.timestamp}</timestamp>
     <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
     <git-commit-id-plugin.version>2.2.4</git-commit-id-plugin.version>
@@ -109,32 +106,4 @@
       </plugins>
     </pluginManagement>
   </build>
-<!--  <repositories>-->
-<!--    <repository>-->
-<!--      <id>central-mirror</id>-->
-<!--      <url>https://artifact.intuit.com/artifactory/maven-proxy</url>-->
-<!--    </repository>-->
-<!--  </repositories>-->
-<!--  <pluginRepositories>-->
-<!--    <pluginRepository>-->
-<!--      <id>central-mirror</id>-->
-<!--      <url>https://artifact.intuit.com/artifactory/maven-proxy</url>-->
-<!--    </pluginRepository>-->
-<!--  </pluginRepositories>-->
-<!--  <distributionManagement>-->
-<!--    <snapshotRepository>-->
-<!--      <id>scm.dev.snap.repo</id>-->
-<!--      <name>SNAPSHOT REPO</name>-->
-<!--      &lt;!&ndash;<url>https://artifact.intuit.com/artifactory/IBP.Intuit-Snapshots/Your.BU.or.group.SNAPSHOT.upload.path</url>&ndash;&gt;-->
-<!--      &lt;!&ndash;This is not used due to maven-deploy-plugin being disabled by phase=never&ndash;&gt;-->
-<!--      <url>https://artifact.intuit.com/artifactory/IBP.Intuit-Snapshots</url>-->
-<!--    </snapshotRepository>-->
-<!--    <repository>-->
-<!--      <id>scm.int.rel.repo</id>-->
-<!--      <name>RELEASE REPO</name>-->
-<!--      &lt;!&ndash;<url>https://artifact.intuit.com/artifactory/IBP.Intuit-Releases/Your.BU.or.group.RELEASE.upload.path</url>&ndash;&gt;-->
-<!--      &lt;!&ndash;This is not used due to maven-deploy-plugin being disabled by phase=never&ndash;&gt;-->
-<!--      <url>https://artifact.intuit.com/artifactory/IBP.Intuit-Releases</url>-->
-<!--    </repository>-->
-<!--  </distributionManagement>-->
 </project>
