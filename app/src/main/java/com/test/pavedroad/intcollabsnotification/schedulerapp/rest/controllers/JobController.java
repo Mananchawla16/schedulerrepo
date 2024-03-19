@@ -77,7 +77,7 @@ public class JobController {
 
     @RequestMapping(value = "/cancel-trigger/{scheduleId}", method = RequestMethod.DELETE)
     @Operation(description = "Cancel a trigger", summary = "Cancel a scheduled trigger")
-    public ResponseEntity<Object> killScheduledOINPJob(@PathVariable("scheduleId") String scheduleId) throws Exception {
+    public ResponseEntity<Object> cancelTrigger(@PathVariable("scheduleId") String scheduleId) throws Exception {
 
         ScheduleIdToJobId scheduleIdToJobId = scheduleIdToJobIdDao.findScheduleId(scheduleId);
         BackgroundJobRequest.delete(scheduleIdToJobId.getJobId());

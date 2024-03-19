@@ -1,7 +1,4 @@
-### March 2021 - during transition period, enable legacy mode for Spring Boot 2.4
-### See https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-Config-Data-Migration-Guide#legacy-mode
-### And https://wiki.intuit.com/display/CTODevSP/Spring+Boot+2.4+Migration+Notes
-### And https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4#using-legacy-processing
+
 spring:
   data:
     mongodb:
@@ -9,11 +6,7 @@ spring:
       database: jobrunr
   config:
     use-legacy-processing: true
-### AND to have Spring process bootstrap files - which was default behavior prior to Spring Boot 2.4 and
-### Spring Cloud 2020 - the project must either include spring-cloud-parent-bootstrap as a dependency,
-### *which we now do*, or else set the environment variable SPRING_CLOUD_BOOTSTRAP_ENABLED=true (!)
-### See above and https://docs.spring.io/spring-cloud-config/docs/3.0.0/reference/html/#config-data-import
-### ------------------------------------------------
+
 
 
 # To disable Open API UI endpoints in PROD, uncomment the following in PROD profile

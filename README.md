@@ -5,11 +5,6 @@ JobController exposes 2 APIs,
 1. Schedule Trigger: Schedules a job using jobrunr where scheduleId is sent by the user and then save the mapping of scheduleId to jobId in documentDb
 2. Cancel Trigger: Receives scheduleId, get the jobId from documentDb based on scheduleId and delete the schedule from the jobrunr using the jobId
 
-
-## Maintainers of this application
-
-Please see [MAINTAINERS.md](./MAINTAINERS.md).
-
 ## Usage
 
 This starter app is a simple Java SpringMVC service
@@ -134,15 +129,9 @@ at java.base/java.lang.Thread.run(Thread.java:833)
 2. Run the service with these details in a kubernetes cluster
 
 
-#### How to run gatling perf tests
-Karate tests can be configured to run as perf tests. The perf tests can be run against any environment using the `-Dkarate.env=<env name>`
-
-```
-    mvn gatling:test -Pperf -Dkarate.env=<environment name>
-``` 
 
 #### How to use Swagger Documentation
-From your web browser navigate [here](http://localhost:8080/swagger-ui.html)
+From your web browser navigate here
 
 
 #### Note about included certificate

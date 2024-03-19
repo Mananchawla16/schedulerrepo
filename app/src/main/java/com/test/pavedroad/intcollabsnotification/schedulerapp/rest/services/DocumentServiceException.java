@@ -1,14 +1,8 @@
-/**
- * Copyright 2015-2020 Intuit Inc. All rights reserved. Unauthorized reproduction
- * is a violation of applicable law. This material contains certain
- * confidential or proprietary information and trade secrets of Intuit Inc.
- */
 package com.test.pavedroad.intcollabsnotification.schedulerapp.rest.services;
 
 /**
  * Base exception for the {@link DocumentService}.
  * 
- * @author koppenheim
  *
  */
 public class DocumentServiceException extends RuntimeException {

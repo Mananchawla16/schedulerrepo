@@ -1,13 +1,9 @@
 spring:
   application:
     name: scheduler
-  cloud:
-    config:
-      uri: https://config-e2e.api.intuit.com/v2
-      label: master
+
     
 
-# https://wiki.intuit.com/display/CTODevSecurity/TLS+Protocol+Standards    
 server:
  ssl:
   enabled-protocols: TLSv1.2

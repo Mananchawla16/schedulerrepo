@@ -1,5 +1,0 @@
-extraction:
-  java:
-    index:
-      java_version: 11
-      build_command: mvn clean package -B -V -e -f pom.xml -s settings.xml -P '!package' -Dfindbugs.skip -Dcheckstyle.skip -Dpmd.skip=true -Denforcer.skip -Dmaven.javadoc.skip -DskipTests -Dmaven.test.skip.exec -Dlicense.skip=true -Drat.skip=true -t /var/lib/lgtm-worker/.m2/toolchains.xml

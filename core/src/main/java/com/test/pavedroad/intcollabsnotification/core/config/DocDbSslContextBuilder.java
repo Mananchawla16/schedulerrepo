@@ -1,42 +1,65 @@
 package com.test.pavedroad.intcollabsnotification.core.config;
 
+import java.io.IOException;
 import java.io.InputStream;
-import java.security.KeyStore;
+import java.security.*;
+import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Iterator;
 
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 
 import com.mongodb.MongoClientException;
 
+import com.test.pavedroad.intcollabsnotification.core.constants.ApplicationConstants;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class DocDbSslContextBuilder {
-	public SSLContext buildSSLContext() {
-		try (InputStream is = getClass().getResourceAsStream("/rds-combined-ca-bundle.pem")) {
-			TrustManagerFactory trustManagerFactory = TrustManagerFactory
-					.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-			{
-				KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-				ks.load(null);
-				Iterator<X509Certificate> certIterator = (Iterator<X509Certificate>)
-						CertificateFactory.getInstance("X.509").generateCertificates(is).iterator();
-				int i = 0;
-				while (certIterator.hasNext()) {
-					ks.setCertificateEntry("RDSCaCert" +i, certIterator.next());
-					i += 1;
-				}
-				trustManagerFactory.init(ks);
-			}
-			SSLContext sslContext = SSLContext.getInstance("TLS");
-			sslContext.init(null, trustManagerFactory.getTrustManagers(), null);
-			log.info("SslContext successfully created : " + sslContext.getDefaultSSLParameters());
+
+	public static final String DEFAULT_CERT_FORMAT = "X.509";
+	public static final String DEFAULT_CERT_ALIAS = "RDSCaCert";
+	public static final String DEFAULT_PROTOCOL = "TLS";
+
+	public SSLContext buildSSLContext() throws Exception {
+		try (InputStream inputStream = getClass().getResourceAsStream(
+				ApplicationConstants.RDS_COMBINED_CA_BUNDLE_PATH)) {
+			TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(
+					TrustManagerFactory.getDefaultAlgorithm());
+			KeyStore keyStore = buildKeyStore(inputStream);
+			trustManagerFactory.init(keyStore);
+
+			KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(
+					KeyManagerFactory.getDefaultAlgorithm());
+			keyManagerFactory.init(keyStore, null);
+
+			SSLContext sslContext = SSLContext.getInstance(DEFAULT_PROTOCOL);
+			sslContext.init(
+					keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), new SecureRandom());
+			log.info("{} | buildSSLContext | sslContext creation success=true : {}, ",
+					ApplicationConstants.SCHEDULER_LOG_IDENTIFIER, sslContext.getDefaultSSLParameters());
 			return sslContext;
-		} catch (Exception e) {
-			throw new MongoClientException("Failure to construct SSL Context for MongoDB", e);
+		} catch (MongoClientException | KeyManagementException | IOException | NoSuchAlgorithmException |
+				 CertificateException | KeyStoreException | UnrecoverableKeyException e) {
+			throw e;
 		}
+	}
+
+	private KeyStore buildKeyStore(
+			InputStream inputStream) throws KeyStoreException, CertificateException, IOException,
+			NoSuchAlgorithmException {
+		KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+		keyStore.load(null);
+		Iterator<X509Certificate> certIterator = (Iterator<X509Certificate>) CertificateFactory.getInstance(
+				DEFAULT_CERT_FORMAT).generateCertificates(inputStream).iterator();
+		int certCounter = 0;
+		while (certIterator.hasNext()) {
+			keyStore.setCertificateEntry(DEFAULT_CERT_ALIAS + certCounter, certIterator.next());
+			certCounter += 1;
+		}
+		return keyStore;
 	}
 }

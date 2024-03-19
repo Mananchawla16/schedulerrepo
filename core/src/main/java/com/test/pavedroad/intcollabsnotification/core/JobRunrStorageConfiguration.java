@@ -46,7 +46,7 @@ public class JobRunrStorageConfiguration {
      * Method to apply SSL settings if not in local environment or if sslSettings are explicitly requested
      * @return
      */
-    private void applySSLSettings(MongoClientSettings.Builder settingsBuilder) {
+    private void applySSLSettings(MongoClientSettings.Builder settingsBuilder) throws Exception {
         String[] activeProfiles = environment.getActiveProfiles();
         if (Arrays.stream(activeProfiles)
                 .noneMatch(x -> StringUtils.equalsIgnoreCase("LOCAL", x))) {
@@ -77,7 +77,7 @@ public class JobRunrStorageConfiguration {
      * @return
      */
     @Bean
-    public MongoClient createMongoClient(MongoClientSettings.Builder createMongoSettingsBuilder) {
+    public MongoClient createMongoClient(MongoClientSettings.Builder createMongoSettingsBuilder) throws Exception {
         MongoClientSettings.Builder settingsBuilder = createMongoSettingsBuilder;
         applySSLSettings(settingsBuilder);
         applyConnectionPoolSettings(settingsBuilder);
@@ -90,7 +90,7 @@ public class JobRunrStorageConfiguration {
      * @return
      */
     @Bean
-    public MongoTemplate createMongoTemplate(MongoClientSettings.Builder createMongoSettingsBuilder) {
+    public MongoTemplate createMongoTemplate(MongoClientSettings.Builder createMongoSettingsBuilder) throws Exception {
         MongoTemplate mongoTemplate = new MongoTemplate(
                 createMongoClient(createMongoSettingsBuilder), mongoProperties.getDatabase());
         MappingMongoConverter mappingMongoConverter = (MappingMongoConverter) mongoTemplate.getConverter();
